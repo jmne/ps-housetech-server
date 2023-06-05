@@ -4,7 +4,7 @@ services:
     build: ./ps-housetech-frontend
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de:82/api/health-check-next || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de/api/health-check-next || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 3
@@ -12,18 +12,18 @@ services:
     build: ./ps-housetech-backend
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de:82/api/health-check-flask || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de/api/health-check-flask || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 3
   nginx:
     build: ./nginx
     ports:
-      - "82:82"
+      - "80:80"
       - "445:445"
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de:82/api/health-check-nginx || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de/api/health-check-nginx || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 3
