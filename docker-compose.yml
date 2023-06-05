@@ -1,28 +1,31 @@
 version: "3"
 services:
   nextjs:
-    build: ./ps-housetech-frontend
+    image: zivgitlab.wwu.io/ml-de/teaching/ps-housetech/ps-housetech-frontend:development
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de/api/health-check-next || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de:82/api/health-check-next || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 3
   api:
-    build: ./ps-housetech-backend
+    image: zivgitlab.wwu.io/ml-de/teaching/ps-housetech/ps-housetech-backend:development
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de/api/health-check-flask || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de:82/api/health-check-flask || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 3
   nginx:
     build: ./nginx
     ports:
-      - "80:80"
+      - "82:82"
+      - "445:445"
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de/api/health-check-nginx || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de:82/api/health-check-nginx || exit 1"]
       interval: 10s
       timeout: 10s
       retries: 3
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt
