@@ -20,7 +20,7 @@ services:
     build: ./nginx
     ports:
       - "80:80"
-      - "445:445"
+      - "443:443"
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "curl --silent --fail http://ps-housetech.uni-muenster.de/api/health-check-nginx || exit 1"]
