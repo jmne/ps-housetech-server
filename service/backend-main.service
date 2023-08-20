@@ -1,0 +1,19 @@
+[Unit]
+Description=uWSGI instance to serve Flask backend (main)
+After=network.target
+
+[Service]
+User=house-admin
+Group=www-data
+WorkingDirectory=/home/house-admin/ps-housetech-backend-main
+ExecStart=/home/house-admin/ps-housetech-backend-main/.venv/bin/uwsgi --http-socket :8000 -w src.run:app --master --strict --enable-threads --vacuum --single-interpreter --need-app --workers 10 --listen 512
+Restart=always
+Environment='CAL_USERNAME='
+Environment='CAL_PASSWORD='
+Environment='HTTP_PROXY=http://wwwproxy'
+Environment='HTTPS_PROXY=http://wwwproxy'
+Environment='WEATHER_API_KEY='
+Environment='INSTAGRAM_KEY='
+
+[Install]
+WantedBy=multi-user.target
