@@ -1,8 +1,0 @@
-[submodule "ps-housetech-frontend"]
-	path = ps-housetech-frontend
-	url = git@zivgitlab.uni-muenster.de:ml-de/teaching/ps-housetech/ps-housetech-frontend.git
-	branch = main
-[submodule "ps-housetech-backend"]
-	path = ps-housetech-backend
-	url = git@zivgitlab.uni-muenster.de:ml-de/teaching/ps-housetech/ps-housetech-backend.git
-	branch = main
